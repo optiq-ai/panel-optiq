@@ -1,16 +1,16 @@
-FROM node:20 as build
+FROM node:18 as build
 
 WORKDIR /app
 
 # Copy package.json and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build the application with detailed logging
+RUN npm run build --verbose
 
 # Production stage with Nginx
 FROM nginx:alpine
