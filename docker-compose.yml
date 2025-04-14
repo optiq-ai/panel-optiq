@@ -14,7 +14,7 @@ services:
       - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:3000/api}
     restart: unless-stopped
     networks:
-      - dashboard-network
+      - optiq_prod
 
   backend:
     build:
@@ -38,7 +38,7 @@ services:
       - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@example.com}
     restart: unless-stopped
     networks:
-      - dashboard-network
+      - optiq_prod
 
   db:
     image: postgres:13
@@ -53,10 +53,10 @@ services:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: unless-stopped
     networks:
-      - dashboard-network
+      - optiq_prod
 
 networks:
-  dashboard-network:
+  optiq_prod:
     driver: bridge
 
 volumes:
